@@ -34,7 +34,7 @@
               <?php foreach ($gejala as $key => $value) : ?>
                 <li><?= $value['nama_gejala'] ?? '' ?> (<?= $value['kode'] ?? '' ?>)</li>
               <?php endforeach; ?>
-            </ul>  
+            </ul>
           </td>
         </tr>
         <tr>
@@ -48,6 +48,10 @@
         <tr>
           <td>Solusi</td>
           <td><?= $penyakit['keterangan'] ?? '-' ?></td>
+        </tr>
+        <tr>
+          <td>Anjuran Obat</td>
+          <td><?= $penyakit['anjuran'] ?? '-' ?></td>
         </tr>
       </table>
       <div class="d-flex justify-content-end">

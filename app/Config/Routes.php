@@ -32,15 +32,13 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-// $routes->get('/', 'Home::index');
-$routes->get('/', 'User::index');
-
+$routes->get('/home', 'Home::index');
 
 $routes->get('/admin', 'Admin::index', ['filter' => 'role:admin']);
 $routes->get('/admin/index', 'Admin::index', ['filter' => 'role:admin']);
 $routes->get('/admin/(:num)', 'Admin::detail/$1', ['filter' => 'role:admin']);
 $routes->post('/periksa/konsultasi/add', 'Periksa::add');
-$routes->get('/periksa/konsultasi/pertanyaan/(:any)', 'Periksa::pertanyaan/$1');
+$routes->get('/periksa/konsultasi/pertanyaan/(:any)/', 'Periksa::pertanyaan/$1');
 $routes->post('/periksa/konsultasi/olah', 'Periksa::olah');
 $routes->get('/periksa/konsultasi/hasil', 'Periksa::hasil');
 $routes->get('/periksa/konsultasi/hasil/simpan', 'Periksa::simpan');

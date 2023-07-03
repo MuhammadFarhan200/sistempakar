@@ -11,8 +11,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="/Beranda/assets/img/favicon.png" rel="icon">
-    <link href="/Beranda/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="/Beranda/assets/img/Background1.png" rel="icon">
+    <link href="/Beranda/assets/img/Background1.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -42,7 +42,8 @@
     <header id="header" class="header fixed-top">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="#" class="logo d-flex align-items-center">
+                <img src="/Beranda/assets/img/Background1.png" alt="">
                 <img src="/Beranda/assets/img/logo.png" alt="">
                 <span>SIPAGAWA</span>
             </a>
@@ -53,7 +54,7 @@
                     <li><a class="nav-link scrollto" href="#about">Tentang</a></li>
                     <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
                     <li><a class="nav-link scrollto" href="#team">Tim SIMH</a></li>
-                    <li><a href="blog.html">Blog</a></li>
+                    <!-- <li><a href="blog.html">Blog</a></li> -->
                     <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
                     <li><a class="getstarted scrollto" href="<?= base_url('login'); ?>">LOGIN</a></li>
                 </ul>
@@ -81,7 +82,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-                    <img src="/Beranda/assets/img/hero-img.png" class="img-fluid" alt="">
+                    <img src="/Beranda/assets/img/gangguan.png" class="img-fluid" alt="">
                 </div>
             </div>
         </div>
@@ -112,8 +113,42 @@
                         </div>
                     </div>
 
+                    <div class="col-lg-4 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
+                        <img src="/Beranda/assets/img/features-3.png" class="img-fluid" alt="">
+                    </div>
+
+                </div>
+            </div>
+            <br>
+            <div class="container" data-aos="fade-up">
+                <div class="row gx-0">
+
+                    <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="content">
+                            <h3>Suryani Institute for Mental Health</h3>
+                            <h2>Yayasan Kesehatan Sosial Berbasis Masyarakat</h2>
+                            <p>
+                                Suryani Institute for Mental Health (SIMH) merupakan lembaga swadaya masyarakat yang
+                                didirikan oleh Prof Dr dr Luh Ketut Suryani, SpKJ (K) pada tahun 2005 dengan visi: menyehatkan
+                                masyarakat melalui pendekatan biopsikospirit-sosiobudaya dan menjadikan Bali sebagai pusat
+                                pemahaman kemampuan spiritual dalam mencapai kebahagian hidup. Adapun misi dari SIMH
+                                adalah mempertahankan Budaya Bali yang berlandaskan agama Hindu dalam menghantarkan
+                                masyarakat Bali mencapai Rahayu-Bahagia. Selain itu juga memiliki misi untuk memahami
+                                kehidupan masyarakat secara holistik dengan pendekatan biopsikospirit-sosiobudaya sehingga
+                                lahir orang yang pandai, mandiri, kreatif serta sehat secara fisik, mental, sosial, dan spiritual.
+
+                            </p>
+                            <div class="text-center text-lg-start">
+                                <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+                                    <span>Selengkapnya</span>
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
-                        <img src="/Beranda/assets/img/about.jpg" class="img-fluid" alt="">
+                        <img src="/Beranda/assets/img/timsimh.jpeg" class="img-fluid" alt="">
                     </div>
 
                 </div>
@@ -325,7 +360,7 @@
                                 </h2>
                                 <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
                                     <div class="accordion-body">
-                                        test
+                                        Mental illness (mental disorder), disebut juga dengan gangguan mental atau jiwa, adalah kondisi kesehatan yang memengaruhi pemikiran, perasaan, perilaku, suasana hati, atau kombinasi diantaranya. Kondisi ini dapat terjadi sesekali atau berlangsung dalam waktu yang lama (kronis).
                                     </div>
                                 </div>
                             </div>
@@ -338,7 +373,7 @@
                                 </h2>
                                 <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
                                     <div class="accordion-body">
-                                        test
+                                        Segera periksakan diri dengan tenaga ahli kesehatan jiwa (Psikiater)
                                     </div>
                                 </div>
                             </div>
@@ -351,7 +386,7 @@
                                 </h2>
                                 <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
                                     <div class="accordion-body">
-                                        test
+                                        Gangguan jiwa disebabkan oleh kombinasi dari beberapa faktor yaitu: biologi, psikologis dan sosial. Faktor biologi antara lain adalah keturunan/genetik, masa dalam kandungan, proses persalinan, nutrisi, riwayat trauma kepala dan adanya gangguan anatomi dan fisiologi saraf.
                                     </div>
                                 </div>
                             </div>
@@ -372,7 +407,7 @@
                                 </h2>
                                 <div id="faq2-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
                                     <div class="accordion-body">
-                                        test
+                                        Kenali penyebab gangguan jiwa, konsultasikan masalah yang dihadapi dengan tenaga ahli kesehatan jiwa (Psikiater) untuk meminimalisir terjadinya gangguan mental yang lebih serius.
                                     </div>
                                 </div>
                             </div>
@@ -385,7 +420,7 @@
                                 </h2>
                                 <div id="faq2-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
                                     <div class="accordion-body">
-                                        test
+                                        Untuk Sakit jiwa tidak bisa sembuh total tetapi sangat mungkin untuk diredakan gejalanya sehingga pengidap gangguan jiwa bisa menjalani aktivitas sehari-hari tanpa gangguan. Sakit jiwa dikatakan tidak bisa sembuh total karena kemungkinan kambuhnya cukup tinggi.
                                     </div>
                                 </div>
                             </div>
@@ -398,7 +433,7 @@
                                 </h2>
                                 <div id="faq2-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
                                     <div class="accordion-body">
-                                        test
+                                        Gangguan jiwa ada banyak jenisnya. Pengobatan untuk kondisi ini pun berbeda-beda, tergantung pada jenis gangguan yang menyerang dan tingkat keparahan dari gejala yang muncul. Jangan malu dan cobalah untuk melakukan pemeriksaan jika merasa mengalami atau memiliki gejala dari gangguan mental. Semakin cepat kondisi ini ditangani, maka semakin besar pula peluang untuk sembuh.
                                     </div>
                                 </div>
                             </div>
@@ -646,7 +681,7 @@
                     <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
                         <div class="member">
                             <div class="member-img">
-                                <img src="/Beranda/assets/img/team/tim4.jpg" class="img-fluid" alt="">
+                                <img src="/Beranda/assets/img/team/tim6.jpg" class="img-fluid" alt="">
                                 <div class="social">
                                     <a href=""><i class="bi bi-twitter"></i></a>
                                     <a href=""><i class="bi bi-facebook"></i></a>
@@ -699,7 +734,7 @@
         End Clients Section -->
 
         <!-- ======= Recent Blog Posts Section ======= -->
-        <section id="recent-blog-posts" class="recent-blog-posts">
+        <!-- <section id="recent-blog-posts" class="recent-blog-posts">
 
             <div class="container" data-aos="fade-up">
 
@@ -741,7 +776,7 @@
 
             </div>
 
-        </section><!-- End Recent Blog Posts Section -->
+        </section> -->
 
         <!-- ======= Contact Section ======= -->
         <section id="contact" class="contact">

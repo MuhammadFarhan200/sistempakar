@@ -42,11 +42,11 @@
     </li>
 
     <!-- Nav Item - Edit -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="tables.html">
             <i class="fas fa-user-edit"></i>
             <span>Edit Profile</span></a>
-    </li>
+    </li> -->
 
     <?php if (in_groups('admin')) : ?>
 

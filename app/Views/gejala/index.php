@@ -51,7 +51,7 @@
                             <td><?= $row['nilai_cf']; ?></td>
                             <td class="text-nowrap">
                                 <!-- <a href="#" class="btn btn-warning"> Edit </a> -->
-                                <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modalUbah" id="btn-edit" data-id="<?= $row['id']; ?>" data-kode="<?= $row['kode']; ?>" data-nama_gejala="<?= $row['nama_gejala']; ?>" data-keterangan="<?= $row['keterangan']; ?>"> Edit </button>
+                                <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modalUbah" id="btn-edit" data-id="<?= $row['id']; ?>" data-kode="<?= $row['kode']; ?>" data-nama_gejala="<?= $row['nama_gejala']; ?>" data-keterangan="<?= $row['keterangan']; ?>" data-nilai_cf="<?= $row['nilai_cf'] ?>"> Edit </button>
                                 <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalHapus"> Hapus </button>
                                 <!-- <a href="#" class="btn btn-danger"> Hapus </a> -->
                             </td>
@@ -88,7 +88,7 @@
                         </div>
                         <div class="form-group">
                             <label for="keterangan"></label>
-                            <input type="text" class="form-control" value="<?= $row['nilai_cf'] ?>" readonly>
+                            <input type="text" name="nilai_cf" id="nilai_cf" class="form-control" value="<?= $row['nilai_cf'] ?>" readonly>
                         </div>
                 </div>
                 <div class="modal-footer">

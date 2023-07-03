@@ -32,6 +32,10 @@ class Penyakit extends BaseController
                 'keterangan' => [
                     'label' => 'Keterangan Penyakit',
                     'rules' => 'required'
+                ],
+                'anjuran' => [
+                    'label' => 'Anjuran Obat',
+                    'rules' => 'required'
                 ]
             ]);
             if (!$val) {
@@ -50,6 +54,7 @@ class Penyakit extends BaseController
                     'kode' => $this->request->getPost('kode'),
                     'nama_penyakit' => $this->request->getPost('nama_penyakit'),
                     'keterangan' => $this->request->getPost('keterangan'),
+                    'anjuran' => $this->request->getPost('anjuran'),
                 ];
 
                 // insert data
@@ -88,6 +93,10 @@ class Penyakit extends BaseController
                 'keterangan' => [
                     'label' => 'Keterangan Penyakit',
                     'rules' => 'required'
+                ],
+                'anjuran' => [
+                    'label' => 'Anjuran Obat',
+                    'rules' => 'required'
                 ]
             ]);
 
@@ -107,6 +116,7 @@ class Penyakit extends BaseController
                     'kode' => $this->request->getPost('kode'),
                     'nama_penyakit' => $this->request->getPost('nama_penyakit'),
                     'keterangan' => $this->request->getPost('keterangan'),
+                    'anjuran' => $this->request->getPost('anjuran'),
                 ];
 
                 // edit data

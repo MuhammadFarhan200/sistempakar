@@ -28,7 +28,7 @@
     <button class="btn btn-primary" data-toggle="modal" data-target="#modalTambah">Tambah Data</button>
     <br><br>
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-10">
             <table class="table">
                 <thead>
                     <tr>
@@ -36,6 +36,7 @@
                         <th scope="col">Kode</th>
                         <th scope="col">Nama Penyakit</th>
                         <th scope="col">Solusi</th>
+                        <th scope="col">Anjuran Obat</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -47,9 +48,10 @@
                             <td><?= $sakit['kode']; ?></td>
                             <td><?= $sakit['nama_penyakit']; ?></td>
                             <td><?= $sakit['keterangan']; ?></td>
+                            <td><?= $sakit['anjuran']; ?></td>
                             <td class="text-nowrap">
                                 <!-- <a href="" class="btn btn-warning"> Edit </a> -->
-                                <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modalUbah" id="btn-edit" data-id="<?= $sakit['id']; ?>" data-kode="<?= $sakit['kode']; ?>" data-nama_penyakit="<?= $sakit['nama_penyakit']; ?>" data-keterangan="<?= $sakit['keterangan']; ?>"> Edit </button>
+                                <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modalUbah" id="btn-edit" data-id="<?= $sakit['id']; ?>" data-kode="<?= $sakit['kode']; ?>" data-nama_penyakit="<?= $sakit['nama_penyakit']; ?>" data-keterangan="<?= $sakit['keterangan']; ?>" data-anjuran="<?= $sakit['anjuran']; ?>"> Edit </button>
                                 <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalHapus"> Hapus </button>
                                 <!-- <a href="#" class="btn btn-danger"> Hapus </a> -->
                             </td>
@@ -84,6 +86,10 @@
                             <label for="keterangan"></label>
                             <input type="text" name="keterangan" id="keterangan" class="form-control" placeholder="Masukan Solusi Penyakit" value="<?= $sakit['keterangan'] ?>">
                         </div>
+                        <div class="form-group">
+                            <label for="anjuran"></label>
+                            <input type="text" name="anjuran" id="anjuran" class="form-control" placeholder="Masukan Anjuran Obat" value="<?= $sakit['anjuran'] ?>">
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -116,6 +122,10 @@
                         <div class="form-group">
                             <label for="keterangan"></label>
                             <input type="text" name="keterangan" id="keterangan" class="form-control" placeholder="Masukan Keterangan Penyakit">
+                        </div>
+                        <div class="form-group">
+                            <label for="anjuran"></label>
+                            <input type="text" name="anjuran" id="anjuran" class="form-control" placeholder="Masukan Anjuran Obat">
                         </div>
                 </div>
                 <div class="modal-footer">

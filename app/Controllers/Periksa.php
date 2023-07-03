@@ -7,6 +7,7 @@ use App\Models\M_Hasil;
 class Periksa extends BaseController
 {
     protected $db, $builder;
+    
     public function __construct()
     {
         $this->db = \Config\Database::connect();
@@ -18,12 +19,14 @@ class Periksa extends BaseController
         return view('periksa/index');
     }
 
-    public function konsultasi() {
+    public function konsultasi()
+    {
         return view('periksa/konsultasi');
     }
-    
-    public function add() {
-        $awal = 'G1';
+
+    public function add()
+    {
+        $awal = 1;
         if (isset($_POST['konsultasi'])) {
             $val = $this->validate([
                 'nama' => [
@@ -47,76 +50,98 @@ class Periksa extends BaseController
                     'no_telp' => $this->request->getPost('no_telp'),
                     'alamat' => $this->request->getPost('alamat'),
                 ];
-                // dd($data);
-                // $this->builder
-                //     ->where('id', $data['user_id'])
-                //     ->update([
-                //         'fullname' => $data['nama'], 
-                //         'tgl_lahir' => $data['tgl_lahir'], 
-                //         'no_telp' => $data['no_telp'], 
-                //         'alamat' => $data['alamat']
-                //     ]);
                 session()->set('data_pasien', $data);
                 session()->remove('gejala');
                 session()->remove('kode_penyakit');
                 session()->remove('hasil_cf');
+                session()->remove('p2_g8');
                 return redirect()->to(base_url('periksa/konsultasi/pertanyaan/' . $awal));
             }
         }
     }
 
-    public function pertanyaan($kode)
+    public function pertanyaan($id_pertanyaan)
     {
         $db      = \Config\Database::connect();
         $query   = $db->table('rule')
-                    ->select('*')
-                    ->join('gejala', 'gejala.id = rule.gejala_id')
-                    ->where('kode', $kode)
-                    ->get();
+            ->select('rule.id as rule_id, gejala.id as gejala_id, gejala.nama_gejala as nama_gejala, gejala.kode as kode, rule.ya as ya, rule.tidak as tidak')
+            ->join('gejala', 'gejala.id = rule.gejala_id')
+            ->where('rule.id', $id_pertanyaan)
+            ->get();
 
         $data['pertanyaan'] = $query->getRowArray();
-        // dd($data['pertanyaan']);    
+        // dd($data['pertanyaan']);  
         return view('periksa/pertanyaan', $data);
     }
 
     public function olah()
     {
-        $kode = $this->request->getPost('next');
-        $huruf = substr($kode, 0, 1);
+        $next = $this->request->getPost('next');
+        $huruf = substr($next, 0, 1);
         $jawaban = $this->request->getPost('jawaban');
-        // dd($jawaban);
+        $get_pertanyaan = $this->db->table('gejala')
+            ->join('rule', 'rule.gejala_id = gejala.id')
+            ->where('rule.id', $jawaban)
+            ->get()
+            ->getRowArray();
+        // dd($jawaban, $get_pertanyaan);
         $gejala = session()->get('gejala');
-        if ($gejala == null ) {
-            session()->set('gejala', $jawaban);
+        if ($gejala == null && $get_pertanyaan['kode'] !== null) {
+            session()->set('gejala', $get_pertanyaan['kode']);
         } else {
-            $gejala = $gejala . ', ' . $jawaban;
+            $get_pertanyaan ? ($get_pertanyaan['kode'] ? $gejala = $gejala . ', ' . $get_pertanyaan['kode'] : '') : '';
             session()->set('gejala', $gejala);
-        }    
-        
-        if ($huruf == 'P' || $kode == null) {
-            session()->set('kode_penyakit', $kode);
+        }
+
+        // dd($gejala);
+        if ($gejala) {
+            if ("G1, G2, G3, G5" == $gejala) {
+                $g8 = $this->db->table('rule')
+                    ->select('rule.id as rule_id, gejala.id as gejala_id, gejala.nama_gejala as nama_gejala, gejala.kode as kode, rule.ya as ya, rule.tidak as tidak')
+                    ->join('gejala', 'gejala.id = rule.gejala_id')
+                    ->where('rule.id', 31)
+                    ->get()
+                    ->getRowArray();
+                // dd($explode_gejala, $g8);
+                if ($g8 !== null) {
+                    $p2_g8 = session()->get('p2_g8');
+                    if ($huruf == 'P' || $next == null) {
+                        session()->set('kode_penyakit', $next);
+                        return redirect()->to(base_url('periksa/konsultasi/hasil'));
+                    } elseif ($p2_g8 !== null && $p2_g8 == 'ya') {
+                        // dd($p2_g8);
+                        return redirect()->to(base_url('periksa/konsultasi/pertanyaan/' . $next));
+                    } else {
+                        session()->set('p2_g8', 'ya');
+                        return redirect()->to(base_url('periksa/konsultasi/pertanyaan/' . $g8['rule_id']));
+                    }
+                }
+            }
+        }
+        if ($huruf == 'P' || $next == null) {
+            session()->set('kode_penyakit', $next);
             return redirect()->to(base_url('periksa/konsultasi/hasil'));
         } else {
-            return redirect()->to(base_url('periksa/konsultasi/pertanyaan/' . $kode));
+            return redirect()->to(base_url('periksa/konsultasi/pertanyaan/' . $next));
         }
     }
 
     public function hasil()
     {
         $kode = session()->get('kode_penyakit');
-        $db      = \Config\Database::connect(); 
+        $db      = \Config\Database::connect();
         $query   = $db->table('penyakit')
-        ->select('*')
-        ->where('kode', $kode)
-        ->get();
+            ->select('*')
+            ->where('kode', $kode)
+            ->get();
         $data['pasien'] = session()->get('data_pasien');
         // dd($data['pasien']);
         $data['penyakit'] = $kode == null ? 'Tidak sedang mengalami gangguan kesehatan.' : $query->getRowArray();
         $data['gejala'] = $this->db->table('gejala')
-                            ->select('*')
-                            ->whereIn('kode', explode(', ', session()->get('gejala')))
-                            ->get()
-                            ->getResultArray();
+            ->select('*')
+            ->whereIn('kode', explode(', ', session()->get('gejala')))
+            ->get()
+            ->getResultArray();
         if ($kode != null) {
             // $data['test'] = [
             //     [
@@ -163,8 +188,9 @@ class Periksa extends BaseController
         }
         return view('periksa/hasil', $data);
     }
-    
-    public function simpan() {
+
+    public function simpan()
+    {
         $kode = session()->get('kode_penyakit');
         $pasien = session()->get('data_pasien');
         $hasil_cf = session()->get('hasil_cf');
@@ -174,8 +200,8 @@ class Periksa extends BaseController
             'user_id' => $pasien['user_id'],
             'nama_pasien' => $pasien['nama'],
             'email' => $pasien['email'],
-            'tgl_lahir' => $pasien['tgl_lahir'], 
-            'no_telp' => $pasien['no_telp'], 
+            'tgl_lahir' => $pasien['tgl_lahir'],
+            'no_telp' => $pasien['no_telp'],
             'alamat' => $pasien['alamat'],
             'gejala' => session()->get('gejala'),
             'penyakit' => $kode ?? 'Tidak sedang mengalami gangguan kesehatan.',
@@ -184,28 +210,30 @@ class Periksa extends BaseController
             'updated_at' => date('Y-m-d H:i:s')
         ]);
         session()->setFlashdata('message', 'Ditambahkan');
+        session()->remove('p2_g8');
         return redirect()->to(base_url('periksa/laporan'));
     }
 
-    public function cetak() {
+    public function cetak()
+    {
         $kode = session()->get('kode_penyakit');
-        $db      = \Config\Database::connect(); 
+        $db      = \Config\Database::connect();
         $query   = $db->table('penyakit')
-                    ->select('*')
-                    ->where('kode', $kode)
-                    ->get();
+            ->select('*')
+            ->where('kode', $kode)
+            ->get();
         $data['pasien'] = session()->get('data_pasien');
         $data['penyakit'] = $kode == null ? 'Tidak sedang mengalami gangguan kesehatan.' : $query->getRowArray();
         $data['gejala'] = $this->db->table('gejala')
-                            ->select('*')
-                            ->whereIn('kode', explode(', ', session()->get('gejala')))
-                            ->get()
-                            ->getResultArray();
+            ->select('*')
+            ->whereIn('kode', explode(', ', session()->get('gejala')))
+            ->get()
+            ->getResultArray();
         $data['user'] = $this->db->table('users')
-                            ->select('*')
-                            ->where('id', session()->get('user_id'))
-                            ->get()
-                            ->getRowArray();
+            ->select('*')
+            ->where('id', session()->get('user_id'))
+            ->get()
+            ->getRowArray();
         if ($kode != null) {
             $cf = 1;
             foreach ($data['gejala'] as $key => $item) {
@@ -225,6 +253,7 @@ class Periksa extends BaseController
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'potrait');
         $dompdf->render();
+        session()->remove('p2_g8');
         return $dompdf->stream('hasil_diagnosa.pdf', array('Attachment' => false));
     }
 }

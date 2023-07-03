@@ -1,3 +1,10 @@
+<?php
+// if (!$this->session->has_userdata('id')) {
+//     redirect(base_url() . 'login.php/auth');
+// }
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 

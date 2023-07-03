@@ -26,23 +26,23 @@
         </div>
       </div>
 
-      <form action="<?= route_to('periksa/konsultasi/olah') ?>" method="post">
+      <form action="<?= route_to('periksa/konsultasi/olah') ?>" method="post" id="pertanyaan-form">
         <div class="card text-center">
           <div class="card-header">
             <h5>Jawablah Pertanyaan dibawah ini sesuai dengan kondisi Anda sebenarnya!</h5>
           </div>
           <div class="card-body">
             <p class="card-text">
-              <?= $pertanyaan['id'] ?>. <?= $pertanyaan['nama_gejala'] ?> ?
+              <?= $pertanyaan['gejala_id'] ?>. <?= $pertanyaan['nama_gejala'] ?> ?
             </p>
             <table class="mx-auto">
                 <tr class="text-center">
                     <input type="text" class="d-none" name="jawaban" id="jawaban" value="">
-                    <td class="px-3"><input id="ya-<?= $pertanyaan['id'] ?>" name="next" type="radio" value="<?= $pertanyaan['ya'] ?>" required> Benar</td>
-                    <td class="px-3"><input id="tidak-<?= $pertanyaan['id'] ?>" name="next" type="radio" value="<?= $pertanyaan['tidak'] ?>" require> Tidak</td>
+                    <td class="px-3"><label><input id="ya-<?= $pertanyaan['rule_id'] ?>" name="next" type="radio" value="<?= $pertanyaan['ya'] ?>" required> Benar</label></td>
+                    <td class="px-3"><label><input id="tidak-<?= $pertanyaan['rule_id'] ?>" name="next" type="radio" value="<?= $pertanyaan['tidak'] ?>" required> Tidak</label></td>
                 </tr>
             </table>
-            <button type="submit" id="lanjut" class="btn btn-primary mt-4">Lanjut</button>
+            <button type="button" id="lanjut" class="btn btn-primary mt-4">Lanjut</button>
           </div>
         </div>
       </form>
@@ -54,12 +54,26 @@
 <?= $this->section('personal-script'); ?>
 <script>
   $(document).ready(function() {
-    $('#ya-<?= $pertanyaan['id'] ?>').click(function() {
-      if (<?= $pertanyaan['id'] ?> == 1) {
-        $('#jawaban').val('G1')
+    $('#lanjut').click(function(e) {
+      e.preventDefault();
+      if ($('input[name=next]:checked').length == 0) {
+        alert('Pilih salah satu jawaban terlebih dahulu!');
+        return false;
       }
-      $('#jawaban').val('<?= $pertanyaan['kode'] ?>')
+      if ($('#ya-<?= $pertanyaan['rule_id'] ?>').is(':checked')) {
+        if (<?= $pertanyaan['rule_id'] ?> == 1) {
+          $('#jawaban').val('1')
+        }
+        $('#jawaban').val('<?= $pertanyaan['rule_id'] ?>')
+      }
+      $('#pertanyaan-form').submit();
     });
+    // $('#ya-rule_id').click(function() {
+    //   if (rule_id == 1) {
+    //     $('#jawaban').val('1')
+    //   }
+    //   $('#jawaban').val(rule_id')
+    // });
   });
 </script>
 <?= $this->endSection(); ?>
